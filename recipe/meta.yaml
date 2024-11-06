@@ -1,5 +1,6 @@
+{% set python_min = python_min|default("0.1a0") %}
 {% set name = "path-imports" %}
-{% set version = "1.1.1" %}
+{% set version = "1.1.2" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +8,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/path_imports-{{ version }}.tar.gz
-  sha256: 12aede01bdf54b3352ad22b6c5847da59eacccaa446f91bd67d87431ebcaa7ba
+  sha256: 0383a2d001664d1be00bdc25c2e98e52b5eaa9cd448f781f9c20f67e9c9eea75
 
 build:
   noarch: python
@@ -16,11 +17,11 @@ build:
 
 requirements:
   host:
-    - python >=3.8
+    - python {{ python_min }}.*
     - hatchling
     - pip
   run:
-    - python >=3.8
+    - python >={{ python_min }}
 
 test:
   imports:
@@ -29,6 +30,7 @@ test:
     - pip check
   requires:
     - pip
+    - python ={{ python_min }}
 
 about:
   home: https://github.com/Aran-Fey/path-imports
